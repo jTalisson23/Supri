@@ -4,36 +4,19 @@ public class Produto {
     private String nome;
     private double preco;
     private int quantidade;
+    private int imagemResid;
 
-    // Construtor com 3 parâmetros
-    public Produto(String nome, double preco, int quantidade) {
+    public Produto(String nome, double preco, int quantidade, int imagemResid) {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.imagemResid = imagemResid;
     }
 
-    // Getters e Setters (opcional)
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
+    public double getPreco() { return preco; }
+    public int getQuantidade() { return quantidade; }
+    public int getImagemResid() { return imagemResid; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
 }
