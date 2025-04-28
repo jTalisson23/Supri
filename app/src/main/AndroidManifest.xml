@@ -14,24 +14,21 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
 
+        <!-- InicioActivity: Definida como tela inicial -->
         <activity
-            android:name=".CadastroActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity android:name=".CarrinhoActivity" />
-
-
-        <activity
-            android:name=".LoginActivity"
+            android:name=".InicioActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Demais Activities -->
+        <activity android:name=".CadastroActivity" android:exported="false"/>
+        <activity android:name=".RegisterActivity" android:exported="false"/>
+        <activity android:name=".CarrinhoActivity" android:exported="false"/>
+        <activity android:name=".LoginActivity" android:exported="false"/>
 
     </application>
 </manifest>
