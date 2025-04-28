@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,15 @@ public class InicioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
+        String nomeUsuario = getIntent().getStringExtra("nome_usuario");
+
+        TextView textSaudacao = findViewById(R.id.textSaudacao);
+
+        if (nomeUsuario != null && !nomeUsuario.isEmpty()) {
+            textSaudacao.setText("Olá, " + nomeUsuario + "!");
+        } else {
+            textSaudacao.setText("Olá, Seja Bem Vindo!");
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 

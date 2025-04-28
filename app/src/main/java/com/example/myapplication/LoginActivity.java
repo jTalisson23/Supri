@@ -7,49 +7,46 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.content.Intent;
-import com.google.gson.Gson;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.myapplication.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editTextUsername, editTextPassword;
     Button buttonLogin;
+    TextView textCreateAccount; // MOVI AQUI PARA FICAR JUNTO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView textCreateAccount = findViewById(R.id.textCreateAccount);
-        textCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
-            }
-        });
-
-
+        // Inicializando os componentes
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
+        textCreateAccount = findViewById(R.id.textCreateAccount);
 
+        // Clique para criar nova conta (ainda só leva pra tela inicial)
+        textCreateAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
+            startActivity(intent);
+            finish(); // Fecha tela de login
+        });
+
+        // Clique para fazer login
         buttonLogin.setOnClickListener(view -> {
-            String usuario = editTextUsername.getText().toString();
-            String senha = editTextPassword.getText().toString();
+            String usuario = editTextUsername.getText().toString().trim();
+            String senha = editTextPassword.getText().toString().trim();
 
             if (usuario.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -70,8 +67,12 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             if (obj.getBoolean("success")) {
                                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, CarrinhoActivity.class));
-                                //finish();
+
+                                // Enviando o nome do usuário para a próxima tela
+                                Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
+                                intent.putExtra("nome_usuario", usuario); // Agora passa o nome corretamente
+                                startActivity(intent);
+                                finish(); // Opcional, fecha tela de login
                             } else {
                                 Toast.makeText(LoginActivity.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
@@ -97,4 +98,3 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
-
