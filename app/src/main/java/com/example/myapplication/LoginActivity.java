@@ -36,9 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin = findViewById(R.id.buttonLogin);
         textCreateAccount = findViewById(R.id.textCreateAccount);
 
-        // Clique para criar nova conta (ainda só leva pra tela inicial)
+        // "Criar conta vai para tela de cadastro "
         textCreateAccount.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, InicioActivity.class);
+            Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
             startActivity(intent);
             finish(); // Fecha tela de login
         });
