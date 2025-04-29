@@ -32,26 +32,14 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(libs.appcompat) // androidx.appcompat
+    implementation(libs.material) // com.google.android.material
     implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    //Bibilioteca para amostrar
+    implementation(libs.constraintlayout) // androidx.constraintlayout
     implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation ("androidx.recyclerview:recyclerview:1.3.2")
-    implementation ("androidx.appcompat:appcompat:1.2.0")
-    implementation ("androidx.appcompat:appcompat:1.4.1")
-
-
-
-
-
-
-
-
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

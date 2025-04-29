@@ -1,4 +1,5 @@
 package com.example.myapplication;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,20 +7,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Produto;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoAdaptador extends RecyclerView.Adapter<ProdutoAdaptador.ProdutoViewHolder> {
+public class ProdutoAdaptador extends RecyclerView.Adapter<ProdutoAdaptador.ProdutoViewHolder> implements android.widget.Filterable {
 
     private List<Produto> listaProdutos;
+    private List<Produto> listaProdutosFiltrada;
     private OnProdutoAtualizadoListener listener;
 
     public ProdutoAdaptador(List<Produto> listaProdutos, OnProdutoAtualizadoListener listener) {
         this.listaProdutos = listaProdutos;
+        this.listaProdutosFiltrada = listaProdutos; // começa com todos os produtos visíveis
         this.listener = listener;
     }
 
@@ -33,7 +35,7 @@ public class ProdutoAdaptador extends RecyclerView.Adapter<ProdutoAdaptador.Prod
 
     @Override
     public void onBindViewHolder(@NonNull ProdutoViewHolder holder, int position) {
-        Produto produto = listaProdutos.get(position);
+        Produto produto = listaProdutosFiltrada.get(position);
         holder.textNome.setText(produto.getNome());
         holder.textPreco.setText(String.format("Preço: R$ %.2f", produto.getPreco()));
         holder.textQuantidade.setText(String.valueOf(produto.getQuantidade()));
@@ -62,7 +64,36 @@ public class ProdutoAdaptador extends RecyclerView.Adapter<ProdutoAdaptador.Prod
 
     @Override
     public int getItemCount() {
-        return listaProdutos.size();
+        return listaProdutosFiltrada.size();
+    }
+
+    @Override
+    public android.widget.Filter getFilter() {
+        return new android.widget.Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String textoBusca = constraint.toString().toLowerCase().trim();
+                List<Produto> listaFiltrada = new ArrayList<>();
+                if (textoBusca.isEmpty()) {
+                    listaFiltrada.addAll(listaProdutos);
+                } else {
+                    for (Produto produto : listaProdutos) {
+                        if (produto.getNome().toLowerCase().contains(textoBusca)) {
+                            listaFiltrada.add(produto);
+                        }
+                    }
+                }
+                FilterResults resultados = new FilterResults();
+                resultados.values = listaFiltrada;
+                return resultados;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                listaProdutosFiltrada = (List<Produto>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     static class ProdutoViewHolder extends RecyclerView.ViewHolder {
