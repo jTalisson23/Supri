@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD600"
-    tools:context=".InicioActivity2">
+    tools:context=".InicioActivity">
 
     <!-- Endereço -->
    <TextView
@@ -162,19 +162,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Banner Promocional -->
-    <ImageView
-        android:id="@+id/imageBanner"
+    <!-- Carrossel de Imagens -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerCarrosel"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="24dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/banner_fretegratis"
         app:layout_constraintTop_toBottomOf="@id/textNovidades"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
