@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,9 @@ public class InicioActivity extends AppCompatActivity {
     private ViewPager2 viewPagerCarrosel;
     private int paginaAtual = 0;
     private final Handler handler = new Handler();
-    private final int delay = 3000; // 3 segundos
+    private final int delay = 3000;
+
+    private FirebaseAuth mAuth;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -29,11 +33,13 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        // Saudação com nome
-        String nomeUsuario = getIntent().getStringExtra("nome_usuario");
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
         TextView textSaudacao = findViewById(R.id.textSaudacao);
-        if (nomeUsuario != null && !nomeUsuario.isEmpty()) {
-            textSaudacao.setText("Olá, " + nomeUsuario + "!");
+
+        if (user != null && user.getEmail() != null) {
+            textSaudacao.setText("Olá, " + user.getEmail() + "!");
         } else {
             textSaudacao.setText("Olá, Seja Bem Vindo!");
         }
@@ -53,23 +59,25 @@ public class InicioActivity extends AppCompatActivity {
                 Toast.makeText(this, "Pesquisar clicado!", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.nav_perfil) {
+                mAuth.signOut();
+                Toast.makeText(this, "Logout realizado!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 return true;
             }
 
             return false;
         });
 
-        // Botão para produtos
+        // Botão de acesso à tela de limpeza
         Button btnIrParaProdutos = findViewById(R.id.BntirParalimpeza);
         btnIrParaProdutos.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, productsfa.class);
             startActivity(intent);
         });
 
-        // --- Carrossel de imagens ---
+        // Carrossel
         viewPagerCarrosel = findViewById(R.id.viewPagerCarrosel);
-
         List<Integer> imagensCarrosel = Arrays.asList(
                 R.drawable.banner_fretegratis,
                 R.drawable.banner_desconto,
@@ -79,7 +87,6 @@ public class InicioActivity extends AppCompatActivity {
         CarroselAdaptador adaptador = new CarroselAdaptador(this, imagensCarrosel);
         viewPagerCarrosel.setAdapter(adaptador);
 
-        // Auto scroll
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

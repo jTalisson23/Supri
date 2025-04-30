@@ -2,65 +2,59 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
     private TextView textCreateAccount;
-
     private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(this, InicioActivity.class));
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textCreateAccount = findViewById(R.id.textCreateAccount);
+        mAuth = FirebaseAuth.getInstance();
 
-        buttonLogin.setOnClickListener(v -> {
+        buttonLogin.setOnClickListener(view -> {
             String email = editTextEmail.getText().toString().trim();
             String senha = editTextPassword.getText().toString().trim();
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                editTextEmail.setError("E-mail inválido");
-                return;
-            }
-
-            if (senha.length() < 6) {
-                editTextPassword.setError("Senha deve ter no mínimo 6 caracteres");
+            if (email.isEmpty() || senha.isEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             mAuth.signInWithEmailAndPassword(email, senha)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String emailUsuario = user != null ? user.getEmail() : "Usuário";
-
-                            Intent intent = new Intent(this, InicioActivity.class);
-                            intent.putExtra("nome_usuario", emailUsuario);
-                            startActivity(intent);
+                            startActivity(new Intent(this, InicioActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(this, "Login inválido. Verifique e-mail e senha.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Erro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         });
 
         textCreateAccount.setOnClickListener(v -> {
             startActivity(new Intent(this, CadastroActivity.class));
-            finish();
         });
     }
 }

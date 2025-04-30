@@ -1,28 +1,26 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.modelo.Produto;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-import com.example.myapplication.ProdutoAdaptador;
-
-
-public class CarrinhoActivity extends AppCompatActivity implements ProdutoAdaptador.OnProdutoAtualizadoListener {
+public class CarrinhoActivity extends AppCompatActivity {
 
     RecyclerView recyclerCarrinho;
     TextView textQtd, textTotal;
     Button buttonConfirmar;
     List<Produto> listaProdutos;
-    ProdutoAdaptador adaptador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +32,20 @@ public class CarrinhoActivity extends AppCompatActivity implements ProdutoAdapta
         textTotal = findViewById(R.id.textTotal);
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
 
-        // Criação da lista e produto inicial
         listaProdutos = new ArrayList<>();
-        listaProdutos.add(new Produto("Limpador Desengordurante - Lavanda", 12.00, 1, R.drawable.lavanda));
+        listaProdutos.add(new Produto("Limpador Lavanda", 12.00, 1, R.drawable.lavanda));
 
-        // Adaptador com listener
-        ProdutoAdaptador adaptor = new ProdutoAdaptador(listaProdutos, this);
+
         recyclerCarrinho.setLayoutManager(new LinearLayoutManager(this));
-        recyclerCarrinho.setAdapter(adaptor);
 
-        // Atualizar totais no início
+
         atualizarResumo(listaProdutos);
 
-        buttonConfirmar.setOnClickListener(v -> {
-            Toast.makeText(this, "Pedido confirmado!", Toast.LENGTH_SHORT).show();
-        });
+        buttonConfirmar.setOnClickListener(v ->
+                Toast.makeText(this, "Pedido confirmado!", Toast.LENGTH_SHORT).show());
     }
 
-    @Override
-    public void onAtualizarTotais(List<Produto> produtos) {
+    public void onProdutoAtualizado(List<Produto> produtos) {
         atualizarResumo(produtos);
     }
 
