@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class productsfa extends AppCompatActivity {
         setContentView(R.layout.fragment_products);
 
         recyclerView = findViewById(R.id.recyclerProdutos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3)); // 3 colunas
 
         listaProdutos = new ArrayList<>();
         adapter = new ProdutoAdapter(listaProdutos, this);
