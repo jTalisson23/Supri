@@ -37,7 +37,6 @@ public class InicioActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         TextView textSaudacao = findViewById(R.id.textSaudacao);
-
         if (user != null && user.getEmail() != null) {
             textSaudacao.setText("Olá, " + user.getEmail() + "!");
         } else {
@@ -69,10 +68,17 @@ public class InicioActivity extends AppCompatActivity {
             return false;
         });
 
-        // Botão de acesso à tela de limpeza
+        // Botão de acesso à tela de produtos (limpeza)
         Button btnIrParaProdutos = findViewById(R.id.BntirParalimpeza);
         btnIrParaProdutos.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, productsfa.class);
+            startActivity(intent);
+        });
+
+        // Botão de acesso à tela de cadastro de produto
+        Button btnAbrirCadastro = findViewById(R.id.btnAbrirCadastro);
+        btnAbrirCadastro.setOnClickListener(v -> {
+            Intent intent = new Intent(InicioActivity.this, CadastroProdutoActivity.class);
             startActivity(intent);
         });
 
@@ -87,6 +93,7 @@ public class InicioActivity extends AppCompatActivity {
         CarroselAdaptador adaptador = new CarroselAdaptador(this, imagensCarrosel);
         viewPagerCarrosel.setAdapter(adaptador);
 
+        // Loop automático do carrossel
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

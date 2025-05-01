@@ -33,7 +33,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
 
         listaProdutos = new ArrayList<>();
-        listaProdutos.add(new Produto("Limpador Lavanda", 12.00, 1, R.drawable.lavanda));
+        listaProdutos.add(new Produto("1", "Limpador Lavanda", "Descrição do produto", "12.00", "imagem_url", 1));
 
 
         recyclerCarrinho.setLayoutManager(new LinearLayoutManager(this));
@@ -55,7 +55,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         for (Produto p : produtos) {
             totalItens += p.getQuantidade();
-            totalValor += p.getPreco() * p.getQuantidade();
+            totalValor += Double.parseDouble(p.getPreco()) * p.getQuantidade();  // Converte preco para double
         }
 
         textQtd.setText("Qtd. Itens: " + totalItens);
