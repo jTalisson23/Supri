@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,6 +29,8 @@ public class productsfa extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
+
+    private EditText edtPesquisa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class productsfa extends AppCompatActivity {
         });
 
         carregarProdutosFirebase();
+        criarBuscadorProdutos();
     }
 
     private void carregarProdutosFirebase() {
@@ -77,6 +84,56 @@ public class productsfa extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(productsfa.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void criarBuscadorProdutos(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
+
+        edtPesquisa = (EditText)findViewById(R.id.edtPesquisa);
+
+        edtPesquisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() >= 3){
+                    Query query = ref.orderByChild("nome")
+                            .startAt(s.toString())
+                            .endAt(s.toString() + "\uf8ff");
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            listaProdutos.clear();
+                            for (DataSnapshot dado : snapshot.getChildren()) {
+                                Produto produto = dado.getValue(Produto.class);
+                                if (produto != null) {
+                                    listaProdutos.add(produto);
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                if(s.length() == 0){
+                    carregarProdutosFirebase();
+                }
             }
         });
     }

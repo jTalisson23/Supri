@@ -1,24 +1,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f4c447"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <EditText
+        android:id="@+id/edtPesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:hint="Pesquisar produtos..."
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerProdutos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btnVerCarrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver no Carrinho"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#4CAF50"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="8dp" />
+        android:text="Ver no Carrinho"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.example.myapplication.modelo;
 
+import com.example.myapplication.Categoria;
+
 public class Produto {
     private String id;
     private String nome;
@@ -8,6 +10,8 @@ public class Produto {
     private String imagem;
     private int quantidade;
     private boolean selecionado; // ✅ NOVO
+
+    private Categoria categoria;
 
     public Produto() {} // Necessário para Firebase
 
@@ -19,6 +23,17 @@ public class Produto {
         this.imagem = imagem;
         this.quantidade = quantidade;
         this.selecionado = false;
+    }
+
+    public Produto(String id, String nome, String descricao, String preco, String imagem, int quantidade, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.imagem = imagem;
+        this.quantidade = quantidade;
+        this.selecionado = false;
+        this.categoria = categoria;
     }
 
     // Getters e Setters
@@ -46,5 +61,13 @@ public class Produto {
 
     public void setSelecionado(boolean selecionado) {
         this.selecionado = selecionado;
+    }
+
+    public Categoria getCategoria(){
+        return this.categoria;
+    }
+
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
     }
 }

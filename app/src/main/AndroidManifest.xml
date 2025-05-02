@@ -33,6 +33,7 @@
         <activity android:name=".PerfilActivity"/>
         <activity android:name=".CadastroProdutoActivity" />
         <activity android:name=".TelaLimpeza"/>
+        <activity android:name=".UtensiliosActivity" android:exported="false"/>
 
 
     </application>

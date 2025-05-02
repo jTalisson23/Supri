@@ -77,6 +77,12 @@ public class InicioActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button bntIrparaUtensilios = findViewById(R.id.bntIrparaUtensilios);
+        bntIrparaUtensilios.setOnClickListener(v -> {
+            Intent intent = new Intent(InicioActivity.this, UtensiliosActivity.class);
+            startActivity(intent);
+        });
+
         // Botão de acesso à tela de cadastro de produto
         Button btnAbrirCadastro = findViewById(R.id.btnAbrirCadastro);
         btnAbrirCadastro.setOnClickListener(v -> {

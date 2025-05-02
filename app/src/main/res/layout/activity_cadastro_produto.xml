@@ -34,6 +34,15 @@
             android:layout_height="wrap_content"
             android:hint="Nome da imagem (ex: sabao_omo.jpg)" />
 
+
+        <Spinner
+            android:id="@+id/spinnerCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:spinnerMode="dropdown" />
+
+
+
         <Button
             android:id="@+id/btnCadastrarProduto"
             android:layout_width="match_parent"
