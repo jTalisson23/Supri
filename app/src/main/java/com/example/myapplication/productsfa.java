@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class productsfa extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
@@ -43,6 +42,12 @@ public class productsfa extends AppCompatActivity {
         listaProdutos = new ArrayList<>();
         adapter = new ProdutoAdapter(listaProdutos, this);
         recyclerView.setAdapter(adapter);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
+
+        Query query = ref.orderByChild("categoria/nome")
+                .equalTo("Limpeza");
+
 
         Button buttonVerCarrinho = findViewById(R.id.btnVerCarrinho);
         buttonVerCarrinho.setOnClickListener(v -> {
@@ -68,7 +73,9 @@ public class productsfa extends AppCompatActivity {
     private void carregarProdutosFirebase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        Query query = ref.orderByChild("categoria/nome").equalTo("Limpeza");
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaProdutos.clear();
@@ -87,6 +94,7 @@ public class productsfa extends AppCompatActivity {
             }
         });
     }
+
 
     private void criarBuscadorProdutos(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");

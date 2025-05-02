@@ -93,6 +93,7 @@
                 android:id="@+id/bntIrparaUtensilios"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/ic_utensilios"
                 android:src="@drawable/ic_utensilios" />
 
             <TextView
@@ -173,14 +174,15 @@
     <!-- Botão Abrir Cadastro movido para baixo do carrossel -->
 
     <!-- Bottom Navigation View -->
+
     <Button
         android:id="@+id/btnAbrirCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal"
         android:text="Abrir Cadastro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewPagerCarrosel" />
 
