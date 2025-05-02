@@ -49,19 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botão Abrir Cadastro -->
-
     <!-- Menu de Categorias -->
-    <Button
-        android:id="@+id/btnAbrirCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Abrir Cadastro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDescricao" />
-
     <LinearLayout
         android:id="@+id/menuCategorias"
         android:layout_width="0dp"
@@ -69,7 +57,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btnAbrirCadastro"
+        app:layout_constraintTop_toBottomOf="@id/textDescricao"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -84,16 +72,14 @@
                 android:id="@+id/BntirParalimpeza"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_limpeza"
-                android:background="@drawable/ic_limpeza"
-                /> <!-- Ícone da limpeza -->
+                android:background="@drawable/ic_limpeza" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Limpeza"
                 android:textSize="12sp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,14 +92,14 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_utensilios" /> <!-- Ícone utensílios -->
+                android:src="@drawable/ic_utensilios" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Utensílios"
                 android:textSize="12sp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,14 +112,14 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_materias" /> <!-- Ícone matérias -->
+                android:src="@drawable/ic_materias" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Materias"
                 android:textSize="12sp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
         </LinearLayout>
 
         <LinearLayout
@@ -146,16 +132,15 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_todos" /> <!-- Ícone todos -->
+                android:src="@drawable/ic_todos" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Todos"
                 android:textSize="12sp"
-                android:textColor="#000"/>
+                android:textColor="#000" />
         </LinearLayout>
-
     </LinearLayout>
 
     <!-- Título Novidades -->
@@ -172,12 +157,7 @@
         app:layout_constraintTop_toBottomOf="@id/menuCategorias"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Banner Promocional -->
     <!-- Carrossel de Imagens -->
-
-
-    <!-- Bottom Navigation View -->
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerCarrosel"
         android:layout_width="0dp"
@@ -186,9 +166,22 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textNovidades" />
+
+    <!-- Botão Abrir Cadastro movido para baixo do carrossel -->
+
+    <!-- Bottom Navigation View -->
+    <Button
+        android:id="@+id/btnAbrirCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Abrir Cadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewPagerCarrosel" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
