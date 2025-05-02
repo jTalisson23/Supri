@@ -5,16 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:background="@android:color/white"
     android:layout_margin="8dp"
-    android:elevation="2dp"
+    android:background="@android:color/white"
     android:gravity="center_vertical">
 
     <ImageView
         android:id="@+id/imageProduto"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/lavanda"
         android:layout_marginEnd="12dp"
         android:contentDescription="Imagem do produto" />
 
@@ -40,7 +38,6 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Controles: Lixeira, -, quantidade, + -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,36 +51,26 @@
             android:src="@android:drawable/ic_menu_delete"
             android:layout_marginEnd="8dp" />
 
-        <!-- Botão de diminuir -->
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnMenos"
-            style="@android:style/Widget.Material.Button.Small"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:text="-"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_custom_background"
-            android:textSize="18sp"
-            android:layout_marginEnd="4dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textQuantidade"
-            android:layout_width="40dp"
+            android:layout_width="36dp"
             android:layout_height="36dp"
-            android:text="1"
             android:gravity="center"
-            android:textSize="16sp"
-            android:layout_marginHorizontal="4dp" />
+            android:text="1"
+            android:textSize="16sp" />
 
-        <!-- Botão de adicionar -->
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnMais"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:text="+"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_custom_background"
-            android:layout_marginStart="4dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

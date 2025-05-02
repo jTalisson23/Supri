@@ -6,11 +6,11 @@ public class Produto {
     private String descricao;
     private String preco;
     private String imagem;
-    private int quantidade;  // Adicionado o campo quantidade
+    private int quantidade;
+    private boolean selecionado; // ✅ NOVO
 
     public Produto() {} // Necessário para Firebase
 
-    // Construtor modificado para incluir o campo quantidade
     public Produto(String id, String nome, String descricao, String preco, String imagem, int quantidade) {
         this.id = id;
         this.nome = nome;
@@ -18,8 +18,10 @@ public class Produto {
         this.preco = preco;
         this.imagem = imagem;
         this.quantidade = quantidade;
+        this.selecionado = false;
     }
 
+    // Getters e Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -35,7 +37,14 @@ public class Produto {
     public String getImagem() { return imagem; }
     public void setImagem(String imagem) { this.imagem = imagem; }
 
-    // Método getter para a quantidade
     public int getQuantidade() { return quantidade; }
     public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+
+    public boolean isSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(boolean selecionado) {
+        this.selecionado = selecionado;
+    }
 }

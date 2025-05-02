@@ -25,6 +25,13 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="Imagem do Produto" />
 
+        <CheckBox
+            android:id="@+id/checkboxSelecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Adicionar ao carrinho" />
+
         <TextView
             android:id="@+id/txtNomeProduto"
             android:layout_width="wrap_content"
@@ -59,5 +66,8 @@
             android:layout_marginTop="4dp" />
 
     </LinearLayout>
+
+
+
 
 </androidx.cardview.widget.CardView>

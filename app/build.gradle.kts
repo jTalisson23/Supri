@@ -48,6 +48,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-database")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.recyclerview)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     implementation ("com.firebaseui:firebase-ui-storage:8.0.0")
@@ -55,6 +56,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.android.material:material:1.12.0")
 
     // Testes
     testImplementation(libs.junit)
