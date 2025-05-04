@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_perfil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDD835">
+
+    <!-- Imagem do Usuário -->
+    <ImageView
+        android:id="@+id/imgPerfil"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_avatar"
+        android:contentDescription="@string/perfil_usuario"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerCrop" />
+
+    <!-- Card com as opções -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/imgPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:text="Usuário"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#DDDDDD" android:layout_marginVertical="8dp"/>
+
+            <!-- Itens do menu com IDs -->
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtEditarPerfil" android:text="Editar perfil" />
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtAlterarSenha" android:text="Alterar senha" />
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtHistoricoPedidos" android:text="Histórico de pedidos" />
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtStatusPedidos" android:text="Status de pedidos" />
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtPolitica" android:text="Política de Privacidade" />
+            <TextView style="@style/MenuItemStyle" android:id="@+id/txtAjuda" android:text="Central de Ajuda" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#DDDDDD" android:layout_marginVertical="8dp"/>
+
+            <!-- Botão Sair com ID -->
+            <LinearLayout
+                android:id="@+id/layoutSair"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_logout"
+                    app:tint="#D32F2F" />
+
+                <TextView
+                    android:id="@+id/txtSair"
+                    android:text="SAIR"
+                    android:textColor="#D32F2F"
+                    android:textStyle="bold"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

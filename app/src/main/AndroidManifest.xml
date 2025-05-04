@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
-
     <!-- Permissão para acesso à internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,27 +13,39 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
 
+
         <!-- InicioActivity: Definida como tela inicial -->
         <activity
             android:name=".InicioActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Demais Activities -->
-        <activity android:name=".CadastroActivity" android:exported="false"/>
-        <activity android:name=".RegisterActivity" android:exported="false"/>
-        <activity android:name=".CarrinhoActivity" android:exported="false"/>
-        <activity android:name=".LoginActivity" android:exported="false"/>
-        <activity android:name=".productsfa" android:exported="false"/>
-        <activity android:name=".PerfilActivity"/>
+        </activity> <!-- Demais Activities -->
+        <activity
+            android:name=".CadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CarrinhoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".productsfa"
+            android:exported="false" />
+        <activity android:name=".PerfilActivity"
+            android:exported="false" />
         <activity android:name=".CadastroProdutoActivity" />
-        <activity android:name=".TelaLimpeza"/>
-        <activity android:name=".UtensiliosActivity" android:exported="false"/>
-
-
+        <activity android:name=".TelaLimpeza" />
+        <activity
+            android:name=".UtensiliosActivity"
+            android:exported="false" />
     </application>
+
 </manifest>
