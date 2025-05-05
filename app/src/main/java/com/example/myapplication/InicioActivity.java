@@ -60,10 +60,14 @@ public class InicioActivity extends AppCompatActivity {
                 Toast.makeText(this, "Pesquisar clicado!", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.nav_perfil) {
-                mAuth.signOut();
-                Toast.makeText(this, "Logout realizado!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
+                if (mAuth.getCurrentUser() != null) {
+                    // Usuário está logado → abre tela de perfil
+                    startActivity(new Intent(this, PerfilActivity.class));
+                } else {
+                    // Usuário NÃO está logado → vai para tela de login
+                    Toast.makeText(this, "Faça login para acessar seu perfil", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
                 return true;
             }
 
