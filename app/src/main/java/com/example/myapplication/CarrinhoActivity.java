@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
@@ -35,6 +37,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         // Obtem a lista de produtos adicionados ao carrinho
         listaCarrinho = CarrinhoSingleton.getInstance().getProdutos();
 
+        if (listaCarrinho.isEmpty()) {
+            Toast.makeText(this, "Carrinho vazio", Toast.LENGTH_SHORT).show();
+            buttonConfirmar.setEnabled(false);
+        }
+
         // Configuração do RecyclerView
         recyclerCarrinho.setLayoutManager(new LinearLayoutManager(this));
         carrinhoAdapter = new CarrinhoAdapter(listaCarrinho, this::atualizarResumo);
@@ -43,9 +50,10 @@ public class CarrinhoActivity extends AppCompatActivity {
         atualizarResumo();
 
         // Botão "Confirmar Pedido"
-        buttonConfirmar.setOnClickListener(v ->
-                Toast.makeText(this, "Pedido confirmado!", Toast.LENGTH_SHORT).show());
+        buttonConfirmar.setOnClickListener(this::onClick);
+
     }
+
 
     // Atualiza a quantidade e o valor total do carrinho
     private void atualizarResumo() {
@@ -68,5 +76,11 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         textQtd.setText("Qtd. Itens: " + totalItens);
         textTotal.setText(String.format("Total: R$ %.2f", totalValor));
+    }
+
+    private void onClick(View v) {
+        Intent intent = new Intent(CarrinhoActivity.this, PedidoConfirmado.class);
+        startActivity(intent);
+        finish(); // Fecha a tela do carrinho se quiser limpar a pilha
     }
 }
