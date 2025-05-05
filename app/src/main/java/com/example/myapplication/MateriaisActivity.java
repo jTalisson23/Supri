@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.modelo.Produto;
@@ -20,14 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtensiliosActivity extends AppCompatActivity {
-
+public class MateriaisActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
@@ -37,10 +34,10 @@ public class UtensiliosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_utensilios);
+        setContentView(R.layout.activity_materiais); // Corrigido: deve ser um layout de activity
 
-        recyclerView = findViewById(R.id.recyclerProdutosUtensilos);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3)); // 3 colunas
+        recyclerView = findViewById(R.id.recyclerProdutosMateriais);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         listaProdutos = new ArrayList<>();
         adapter = new ProdutoAdapter(listaProdutos, this);
@@ -49,7 +46,8 @@ public class UtensiliosActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
         Query query = ref.orderByChild("categoria/nome")
-                        .equalTo("Utensílios");
+                .equalTo("Materiais");
+
 
         Button buttonVerCarrinho = findViewById(R.id.btnVerCarrinho);
         buttonVerCarrinho.setOnClickListener(v -> {
@@ -72,11 +70,10 @@ public class UtensiliosActivity extends AppCompatActivity {
         criarBuscadorProdutos();
     }
 
-
     private void carregarProdutosFirebase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        Query query = ref.orderByChild("categoria/nome").equalTo("Utensílios");
+        Query query = ref.orderByChild("categoria/nome").equalTo("Materiais");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,7 +90,7 @@ public class UtensiliosActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UtensiliosActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MateriaisActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
             }
         });
     }

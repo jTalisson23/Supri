@@ -111,15 +111,17 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageView
+            <Button
+                android:id="@+id/bntIrparaMateriais"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_materias" />
+                android:src="@drawable/ic_materias"
+                android:background="@drawable/ic_materias"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Materias"
+                android:text="Materiais"
                 android:textSize="12sp"
                 android:textColor="#000" />
         </LinearLayout>
@@ -131,10 +133,14 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageView
+            <Button
+                android:id="@+id/bntTodos"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_todos" />
+                android:background="@drawable/ic_todos"
+                android:src="@drawable/ic_todos"
+                
+                />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.modelo.Produto;
@@ -20,14 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtensiliosActivity extends AppCompatActivity {
-
+public class TodosProdActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
@@ -37,19 +34,14 @@ public class UtensiliosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_utensilios);
+        setContentView(R.layout.activity_todos); // Certifique-se de que este layout está correto
 
-        recyclerView = findViewById(R.id.recyclerProdutosUtensilos);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3)); // 3 colunas
+        recyclerView = findViewById(R.id.recyclerProdutostodos);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         listaProdutos = new ArrayList<>();
         adapter = new ProdutoAdapter(listaProdutos, this);
         recyclerView.setAdapter(adapter);
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
-
-        Query query = ref.orderByChild("categoria/nome")
-                        .equalTo("Utensílios");
 
         Button buttonVerCarrinho = findViewById(R.id.btnVerCarrinho);
         buttonVerCarrinho.setOnClickListener(v -> {
@@ -72,13 +64,10 @@ public class UtensiliosActivity extends AppCompatActivity {
         criarBuscadorProdutos();
     }
 
-
     private void carregarProdutosFirebase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        Query query = ref.orderByChild("categoria/nome").equalTo("Utensílios");
-
-        query.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() { // <-- Removido filtro por categoria
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaProdutos.clear();
@@ -93,31 +82,26 @@ public class UtensiliosActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UtensiliosActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TodosProdActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    private void criarBuscadorProdutos(){
+    private void criarBuscadorProdutos() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        edtPesquisa = (EditText)findViewById(R.id.edtPesquisa);
+        edtPesquisa = findViewById(R.id.edtPesquisa);
 
         edtPesquisa.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() >= 3){
+                if (s.length() >= 3) {
                     Query query = ref.orderByChild("nome")
                             .startAt(s.toString())
                             .endAt(s.toString() + "\uf8ff");
@@ -136,13 +120,11 @@ public class UtensiliosActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
+                        public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
 
-                if(s.length() == 0){
+                if (s.length() == 0) {
                     carregarProdutosFirebase();
                 }
             }

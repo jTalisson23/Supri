@@ -34,6 +34,8 @@
         <activity android:name=".CadastroProdutoActivity" />
         <activity android:name=".TelaLimpeza"/>
         <activity android:name=".UtensiliosActivity" android:exported="false"/>
+        <activity android:name=".MateriaisActivity" android:exported="false"/>
+        <activity android:name=".TodosProdActivity" android:exported="false"/>
 
 
     </application>
