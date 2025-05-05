@@ -10,8 +10,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.myapplication.modelo.Pedido;
 
 import com.example.myapplication.modelo.Produto;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -79,8 +83,59 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
     private void onClick(View v) {
-        Intent intent = new Intent(CarrinhoActivity.this, PedidoConfirmado.class);
-        startActivity(intent);
-        finish(); // Fecha a tela do carrinho se quiser limpar a pilha
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "Você precisa estar logado para confirmar o pedido", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+
+        gerarNumeroPedidoEEnviar();
+
+    }
+    private void salvarPedidoFirebase(String numeroPedido) {
+        String anoAtual = String.valueOf(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR));
+        DatabaseReference pedidosRef = FirebaseDatabase.getInstance().getReference("pedidos")
+                .child(anoAtual)
+                .child(numeroPedido);
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Pedido pedido = new Pedido(userId, listaCarrinho, System.currentTimeMillis());
+
+        pedidosRef.setValue(pedido).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "Pedido confirmado com número #" + numeroPedido, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, PedidoConfirmado.class);
+                intent.putExtra("numeroPedido", Integer.parseInt(numeroPedido));  // Envia o número do pedido
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Toast.makeText(this, "Erro ao salvar pedido", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void gerarNumeroPedidoEEnviar() {
+        String anoAtual = String.valueOf(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR));
+        DatabaseReference pedidosRef = FirebaseDatabase.getInstance().getReference("pedidos").child(anoAtual);
+
+        pedidosRef.child("contador").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                long numero = 1;
+                if (task.getResult().exists()) {
+                    numero = task.getResult().getValue(Long.class) + 1;
+                }
+
+                pedidosRef.child("contador").setValue(numero); // atualiza contador
+
+                String numeroPedido = String.valueOf(numero);
+                salvarPedidoFirebase(numeroPedido);
+
+            } else {
+                Toast.makeText(this, "Erro ao gerar número do pedido", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
