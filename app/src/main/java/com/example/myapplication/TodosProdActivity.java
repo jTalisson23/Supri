@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class productsfa extends AppCompatActivity {
+public class TodosProdActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
@@ -34,20 +34,14 @@ public class productsfa extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_products); // Corrigido: deve ser um layout de activity
+        setContentView(R.layout.activity_todos); // Certifique-se de que este layout está correto
 
-        recyclerView = findViewById(R.id.recyclerProdutos);
+        recyclerView = findViewById(R.id.recyclerProdutostodos);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         listaProdutos = new ArrayList<>();
         adapter = new ProdutoAdapter(listaProdutos, this);
         recyclerView.setAdapter(adapter);
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
-
-        Query query = ref.orderByChild("categoria/nome")
-                .equalTo("Limpeza");
-
 
         Button buttonVerCarrinho = findViewById(R.id.btnVerCarrinho);
         buttonVerCarrinho.setOnClickListener(v -> {
@@ -73,9 +67,7 @@ public class productsfa extends AppCompatActivity {
     private void carregarProdutosFirebase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        Query query = ref.orderByChild("categoria/nome").equalTo("Limpeza");
-
-        query.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() { // <-- Removido filtro por categoria
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaProdutos.clear();
@@ -90,31 +82,26 @@ public class productsfa extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(productsfa.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TodosProdActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    private void criarBuscadorProdutos(){
+    private void criarBuscadorProdutos() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        edtPesquisa = (EditText)findViewById(R.id.edtPesquisa);
+        edtPesquisa = findViewById(R.id.edtPesquisa);
 
         edtPesquisa.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() >= 3){
+                if (s.length() >= 3) {
                     Query query = ref.orderByChild("nome")
                             .startAt(s.toString())
                             .endAt(s.toString() + "\uf8ff");
@@ -133,13 +120,11 @@ public class productsfa extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
+                        public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
 
-                if(s.length() == 0){
+                if (s.length() == 0) {
                     carregarProdutosFirebase();
                 }
             }

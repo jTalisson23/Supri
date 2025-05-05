@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class productsfa extends AppCompatActivity {
+public class MateriaisActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter adapter;
     private List<Produto> listaProdutos;
@@ -34,9 +34,9 @@ public class productsfa extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_products); // Corrigido: deve ser um layout de activity
+        setContentView(R.layout.activity_materiais); // Corrigido: deve ser um layout de activity
 
-        recyclerView = findViewById(R.id.recyclerProdutos);
+        recyclerView = findViewById(R.id.recyclerProdutosMateriais);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         listaProdutos = new ArrayList<>();
@@ -46,7 +46,7 @@ public class productsfa extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
         Query query = ref.orderByChild("categoria/nome")
-                .equalTo("Limpeza");
+                .equalTo("Materiais");
 
 
         Button buttonVerCarrinho = findViewById(R.id.btnVerCarrinho);
@@ -73,7 +73,7 @@ public class productsfa extends AppCompatActivity {
     private void carregarProdutosFirebase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos");
 
-        Query query = ref.orderByChild("categoria/nome").equalTo("Limpeza");
+        Query query = ref.orderByChild("categoria/nome").equalTo("Materiais");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,7 +90,7 @@ public class productsfa extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(productsfa.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MateriaisActivity.this, "Erro ao carregar produtos.", Toast.LENGTH_SHORT).show();
             }
         });
     }
