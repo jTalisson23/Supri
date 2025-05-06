@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.cardview.widget.CardView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -74,27 +75,26 @@ public class InicioActivity extends AppCompatActivity {
             return false;
         });
 
-        // Botão de acesso à tela de produtos (limpeza)
-        Button btnIrParaProdutos = findViewById(R.id.BntirParalimpeza);
+        // Botão de acesso à tela de produtos
+        CardView btnIrParaProdutos = findViewById(R.id.BntirParalimpeza);
         btnIrParaProdutos.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, productsfa.class);
             startActivity(intent);
         });
 
-        Button bntIrparaUtensilios = findViewById(R.id.bntIrparaUtensilios);
+        CardView bntIrparaUtensilios = findViewById(R.id.bntIrparaUtensilios);
         bntIrparaUtensilios.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, UtensiliosActivity.class);
             startActivity(intent);
         });
 
-
-        Button bntIrparaMateriais = findViewById(R.id.bntIrparaMateriais);
+        CardView bntIrparaMateriais = findViewById(R.id.bntIrparaMateriais);
         bntIrparaMateriais.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, MateriaisActivity.class);
             startActivity(intent);
         });
 
-        Button bntTodos = findViewById(R.id.bntTodos);
+        CardView bntTodos = findViewById(R.id.bntTodos);
         bntTodos.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, TodosProdActivity.class);
             startActivity(intent);

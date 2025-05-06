@@ -55,11 +55,10 @@
         <!-- Botão de cadastro -->
         <Button
             android:id="@+id/buttonRegister"
+            style="@style/BotaoVermelho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CADASTRAR"
-            android:textColor="#FFFFFF"
-            android:background="#000000"
             android:layout_marginBottom="16dp"/>
 
         <!-- Voltar para login -->
