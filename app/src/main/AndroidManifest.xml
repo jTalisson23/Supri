@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-
-
+        <activity
+            android:name=".Perfil_editar"
+            android:exported="false" />
         <!-- InicioActivity: Definida como tela inicial -->
         <activity
             android:name=".InicioActivity"
@@ -28,34 +29,36 @@
             android:name=".CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
             android:name=".CarrinhoActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:exported="false" /> <!-- PERFIL Activities -->
+        <activity
+            android:name=".PerfilActivity"
             android:exported="false" />
+        <activity
+            android:name=".Perfil_alterarsenha"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil_historicodepedidos"
+            android:exported="false" />
+        <activity android:name=".CadastroProdutoActivity" /> <!-- HOME Activities -->
         <activity
             android:name=".productsfa"
             android:exported="false" />
-        <activity android:name=".PerfilActivity"
-            android:exported="false" />
-        <activity android:name=".CadastroProdutoActivity" />
-
-        <activity android:name=".TelaLimpeza"/>
-        <activity android:name=".UtensiliosActivity" android:exported="false"/>
-        <activity android:name=".MateriaisActivity" android:exported="false"/>
-        <activity android:name=".TodosProdActivity" android:exported="false"/>
-        <activity android:name=".PedidoConfirmado" android:exported="false"/>
-
-
-        =======
-        <activity android:name=".TelaLimpeza" />
         <activity
             android:name=".UtensiliosActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".MateriaisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TodosProdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PedidoConfirmado"
+            android:exported="false" />
     </application>
 
 </manifest>

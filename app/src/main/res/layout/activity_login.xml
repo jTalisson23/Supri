@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:text="Ainda não tem conta? Criar conta agora"
             android:textColor="#000000"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </ScrollView>

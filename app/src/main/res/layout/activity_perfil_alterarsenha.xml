@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:text="ALTERAR SENHA"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editSenhaAtual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Senha atual"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/editNovaSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nova senha (mín. 6 caracteres)"
+            android:inputType="textPassword"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnAlterarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alterar senha"
+            android:backgroundTint="#FBC02D"
+            android:textColor="#000000"
+            android:padding="12dp" />
+    </LinearLayout>
+</ScrollView>

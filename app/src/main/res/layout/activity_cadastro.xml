@@ -20,7 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Nome (Opcional, não vai pro Firebase Auth) -->
+        <!-- Nome -->
         <EditText
             android:id="@+id/editTextNome"
             android:layout_width="match_parent"
@@ -29,6 +29,98 @@
             android:padding="12dp"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="16dp"/>
+
+        <!-- CEP + Botão Buscar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextCep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="CEP"
+                android:inputType="number"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnBuscarCep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Buscar"
+                android:backgroundTint="#E84C4F"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <!-- Rua + Número -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextRua"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="Rua"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/editTextNumero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Número"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"/>
+        </LinearLayout>
+
+        <!-- Bairro -->
+        <EditText
+            android:id="@+id/editTextBairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bairro"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Cidade + Estado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextCidade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="Cidade"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/editTextEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="UF"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"/>
+        </LinearLayout>
 
         <!-- E-mail -->
         <EditText
@@ -55,10 +147,11 @@
         <!-- Botão de cadastro -->
         <Button
             android:id="@+id/buttonRegister"
-            style="@style/BotaoVermelho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CADASTRAR"
+            android:backgroundTint="#E84C4F"
+            android:textColor="#FFFFFF"
             android:layout_marginBottom="16dp"/>
 
         <!-- Voltar para login -->
@@ -66,8 +159,8 @@
             android:id="@+id/textGoToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Já tem uma conta? Fazer login"
+            android:text="Já tem uma conta? Faça login"
             android:textColor="#000000"
-            android:textSize="14sp"/>
+            android:textSize="14dp"/>
     </LinearLayout>
 </ScrollView>

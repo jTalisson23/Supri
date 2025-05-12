@@ -7,14 +7,16 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.cardview.widget.CardView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,9 @@ public class InicioActivity extends AppCompatActivity {
     private final int delay = 3000;
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
+
+    private TextView textSaudacao, textEndereco;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -34,14 +39,33 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-
-
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
-        TextView textSaudacao = findViewById(R.id.textSaudacao);
-        if (user != null && user.getEmail() != null) {
-            textSaudacao.setText("Olá, " + user.getEmail() + "!");
+        textSaudacao = findViewById(R.id.textSaudacao);
+        textEndereco = findViewById(R.id.textEndereco);
+
+        // Buscar nome e endereço do Firestore
+        if (user != null) {
+            String uid = user.getUid();
+
+            firestore.collection("usuarios").document(uid)
+                    .get()
+                    .addOnSuccessListener(document -> {
+                        if (document.exists()) {
+                            String nome = document.getString("nome");
+                            textSaudacao.setText("Olá, " + nome + "!");
+
+                            if (document.contains("endereco")) {
+                                String rua = document.get("endereco.rua") != null ? document.get("endereco.rua").toString() : "";
+                                String numero = document.get("endereco.numero") != null ? document.get("endereco.numero").toString() : "";
+                                textEndereco.setText(rua + " - " + numero);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this, "Erro ao carregar dados do usuário", Toast.LENGTH_SHORT).show());
         } else {
             textSaudacao.setText("Olá, Seja Bem Vindo!");
         }
@@ -52,20 +76,18 @@ public class InicioActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
-                Toast.makeText(this, "Você já está na Home!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Já estamos na Home!", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.nav_carrinho) {
                 startActivity(new Intent(this, CarrinhoActivity.class));
                 return true;
             } else if (id == R.id.nav_pesquisar) {
-                Toast.makeText(this, "Pesquisar clicado!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, TodosProdActivity.class));
                 return true;
             } else if (id == R.id.nav_perfil) {
                 if (mAuth.getCurrentUser() != null) {
-                    // Usuário está logado → abre tela de perfil
                     startActivity(new Intent(this, PerfilActivity.class));
                 } else {
-                    // Usuário NÃO está logado → vai para tela de login
                     Toast.makeText(this, "Faça login para acessar seu perfil", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, LoginActivity.class));
                 }
@@ -75,7 +97,7 @@ public class InicioActivity extends AppCompatActivity {
             return false;
         });
 
-        // Botão de acesso à tela de produtos
+        // Botões de categorias
         CardView btnIrParaProdutos = findViewById(R.id.BntirParalimpeza);
         btnIrParaProdutos.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, productsfa.class);
@@ -100,7 +122,7 @@ public class InicioActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Botão de acesso à tela de cadastro de produto
+        // Botão de cadastro de produto
         Button btnAbrirCadastro = findViewById(R.id.btnAbrirCadastro);
         btnAbrirCadastro.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, CadastroProdutoActivity.class);

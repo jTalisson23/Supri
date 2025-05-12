@@ -39,6 +39,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/textNomeUsuario"
                 android:text="Usuário"
                 android:textStyle="bold"
                 android:textSize="18sp"
