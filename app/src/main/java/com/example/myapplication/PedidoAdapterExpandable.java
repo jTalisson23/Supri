@@ -1,4 +1,3 @@
-
 package com.example.myapplication;
 
 import android.view.LayoutInflater;
@@ -7,9 +6,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
+import java.util.Map;
 
 public class PedidoAdapterExpandable extends RecyclerView.Adapter<PedidoAdapterExpandable.ViewHolder> {
 
@@ -55,21 +58,24 @@ public class PedidoAdapterExpandable extends RecyclerView.Adapter<PedidoAdapterE
         firestore.collection("pedidos")
                 .document(pedido.getAno())
                 .collection(pedido.getCodigo())
-                .document("produtos")
+                .document("produtos") // CORRIGIDO AQUI
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     if (snapshot.exists()) {
-                        for (String key : snapshot.getData().keySet()) {
-                            Object obj = snapshot.get(key);
-                            if (obj instanceof java.util.Map) {
-                                java.util.Map<String, Object> item = (java.util.Map<String, Object>) obj;
-                                String nome = (String) item.get("nome");
-                                Long qtd = (Long) item.get("quantidade");
+                        Map<String, Object> produtos = snapshot.getData();
+                        if (produtos != null) {
+                            for (String key : produtos.keySet()) {
+                                Object obj = produtos.get(key);
+                                if (obj instanceof Map) {
+                                    Map<String, Object> item = (Map<String, Object>) obj;
+                                    String nome = (String) item.get("nome");
+                                    Long qtd = (Long) item.get("quantidade");
 
-                                TextView txt = new TextView(holder.itemView.getContext());
-                                txt.setText("- " + nome + ": " + qtd + "x");
-                                txt.setPadding(0, 8, 0, 8);
-                                holder.layoutDetalhes.addView(txt);
+                                    TextView txt = new TextView(holder.itemView.getContext());
+                                    txt.setText("- " + nome + ": " + (qtd != null ? qtd : 0) + "x");
+                                    txt.setPadding(0, 8, 0, 8);
+                                    holder.layoutDetalhes.addView(txt);
+                                }
                             }
                         }
                     }
