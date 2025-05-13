@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,6 +103,7 @@ public class InicioActivity extends AppCompatActivity {
 
         // Botão de acesso à tela de cadastro de produto
         Button btnAbrirCadastro = findViewById(R.id.btnAbrirCadastro);
+        btnAbrirCadastro.setVisibility(View.GONE); // faz sumir da tela
         btnAbrirCadastro.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, CadastroProdutoActivity.class);
             startActivity(intent);
