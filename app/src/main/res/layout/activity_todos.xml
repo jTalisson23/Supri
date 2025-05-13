@@ -27,11 +27,11 @@
 
     <Button
         android:id="@+id/btnVerCarrinho"
+        style="@style/BotaoVermelho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#4CAF50"
-        android:text="Ver no Carrinho"
+                android:text="Ver no Carrinho"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

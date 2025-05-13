@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="#FFD600"
@@ -30,40 +31,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@android:color/white"
-        android:padding="16dp"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/textResumo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lista de pedido"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textQtd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Qtd. Itens: 0"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="Qtd. Itens: 0" />
 
         <TextView
             android:id="@+id/textTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total: R$ 0,00"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="Total: R$ 0,00" />
 
         <Button
             android:id="@+id/buttonConfirmar"
+            style="@style/BotaoVermelho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button"
             android:text="CONFIRMAR PEDIDO"
-            android:background="#D32F2F"
-            android:textColor="#FFF"/>
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 </LinearLayout>
