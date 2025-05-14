@@ -53,8 +53,8 @@
             <TextView style="@style/MenuItemStyle" android:id="@+id/txtEditarPerfil" android:text="Editar perfil" />
             <TextView style="@style/MenuItemStyle" android:id="@+id/txtAlterarSenha" android:text="Alterar senha" />
             <TextView style="@style/MenuItemStyle" android:id="@+id/txtHistoricoPedidos" android:text="Histórico de pedidos" />
-            <TextView style="@style/MenuItemStyle" android:id="@+id/txtStatusPedidos" android:text="Status de pedidos" />
-            <TextView style="@style/MenuItemStyle" android:id="@+id/txtPolitica" android:text="Política de Privacidade" />
+            //TextView style="@style/MenuItemStyle" android:id="@+id/txtStatusPedidos" android:text="Status de pedidos" />
+            //TextView style="@style/MenuItemStyle" android:id="@+id/txtPolitica" android:text="Política de Privacidade" />
             <TextView style="@style/MenuItemStyle" android:id="@+id/txtAjuda" android:text="Central de Ajuda" />
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#DDDDDD" android:layout_marginVertical="8dp"/>

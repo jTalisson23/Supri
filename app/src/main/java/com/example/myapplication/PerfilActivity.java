@@ -36,8 +36,8 @@ public class PerfilActivity extends AppCompatActivity {
         txtEditarPerfil = findViewById(R.id.txtEditarPerfil);
         txtAlterarSenha = findViewById(R.id.txtAlterarSenha);
         txtHistoricoPedidos = findViewById(R.id.txtHistoricoPedidos);
-        txtStatusPedidos = findViewById(R.id.txtStatusPedidos);
-        txtPolitica = findViewById(R.id.txtPolitica);
+        //txtStatusPedidos = findViewById(R.id.txtStatusPedidos);
+        //txtPolitica = findViewById(R.id.txtPolitica);
         txtAjuda = findViewById(R.id.txtAjuda);
         txtSair = findViewById(R.id.txtSair);
 
@@ -57,9 +57,9 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         // Outros itens de menu
-        txtStatusPedidos.setOnClickListener(v -> abrirTela("Status de Pedidos"));
-        txtPolitica.setOnClickListener(v -> abrirTela("Política de Privacidade"));
-        txtAjuda.setOnClickListener(v -> abrirTela("Central de Ajuda"));
+        //txtStatusPedidos.setOnClickListener(v -> abrirTela("Status de Pedidos"));
+        //txtPolitica.setOnClickListener(v -> abrirTela("Política de Privacidade"));
+        //txtAjuda.setOnClickListener(v -> abrirTela("Central de Ajuda"));
 
         // Sair da conta
         txtSair.setOnClickListener(v -> sairDaConta());
